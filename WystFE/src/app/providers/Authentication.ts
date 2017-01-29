@@ -7,38 +7,49 @@ export class Authentication {
   
     private auth2: any;
     private user: any;
+    private userChangeHandlers: Array<() => void> = [];
 
     constructor() {
-        gapi.load('auth2', () => { this.initSignin() });
+      gapi.load('auth2', () => { this.initSignin() });
     }
 
     public isSignedIn(): boolean {
+      console.log("Is the user signed in: ", this.user);
       return this.user != null;
     }
 
-    public getUser(): any {
-        return this.user;
+    public onUserChange(cb: () => void) {
+      this.userChangeHandlers.push(cb);
+    }
+
+    public signOut() {
+      this.auth2.signOut().then(() => {
+        console.log("Signed out!");
+        this.user = null;
+        this.fireUserChangeHandlers();
+      });
+    }
+
+    private fireUserChangeHandlers() {
+      this.userChangeHandlers.forEach(cb => cb());
     }
 
     private initSignin() {
-        console.log("initSignin");
+      console.log("initSignin");
 
-        this.auth2 = gapi.auth2.init({
-            client_id: CLIENT_ID,
-            scope: 'profile'
-        });
-        
-        this.auth2.isSignedIn.listen((signInState) => {
-        });
+      this.auth2 = gapi.auth2.init({
+        client_id: CLIENT_ID,
+        scope: 'profile'
+      });
 
-        this.auth2.currentUser.listen((user) => {
-            this.user = user;
-            console.log("User: ", user);
-        });
+      this.auth2.currentUser.listen((user) => {
+          this.user = user;
+          this.fireUserChangeHandlers();
+      });
 
-        // Sign in the user if they are currently signed in.
-        if (this.auth2.isSignedIn.get() == true) {
-            this.auth2.signIn();
-        }
+      // Sign in the user if they are currently signed in.
+      if (this.auth2.isSignedIn.get() == true) {
+          this.auth2.signIn();
+      }
     }
 }
