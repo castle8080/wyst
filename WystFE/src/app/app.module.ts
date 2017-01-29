@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { Authentication } from './providers/Authentication';
 
 @NgModule({
   declarations: [
@@ -14,13 +15,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [Authentication],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  static onSignIn() {
-    console.log("I think a sign in occurred!");
-  }
 }
-
-window["onSignIn"] = AppModule.onSignIn;

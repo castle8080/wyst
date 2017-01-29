@@ -1,1 +1,4 @@
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<div *ngIf="!auth.isSignedIn()">
+  Do the signin.<br/>
+  <div class="g-signin2"></div>
+</div>
