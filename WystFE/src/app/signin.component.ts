@@ -1,19 +1,11 @@
 import { Component } from '@angular/core';
-import { Authentication } from '../providers/Authentication';
+import { Authentication } from './providers/Authentication';
 import { ApplicationRef } from '@angular/core';
 
 @Component({
-  selector: 'w-authentication',
-  template: `
-    <div [ngStyle]="{'display': signInDisplay()}">
-      <div class="g-signin2"></div>
-    </div>
-    <div [ngStyle]="{'display': signOutDisplay()}">
-      <button (click)="signOut()">[Sign Out]</button>
-    </div>
-  `
+  templateUrl: './signin.component.html'
 })
-export class AuthenticationComponent {
+export class SigninComponent {
 
   auth: Authentication;
 

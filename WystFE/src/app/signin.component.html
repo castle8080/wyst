@@ -1,0 +1,6 @@
+<div [ngStyle]="{'display': signInDisplay()}">
+    <div class="g-signin2"></div>
+</div>
+<div [ngStyle]="{'display': signOutDisplay()}">
+    <button (click)="signOut()">[Sign Out]</button>
+</div>
