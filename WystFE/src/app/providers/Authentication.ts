@@ -46,10 +46,5 @@ export class Authentication {
           this.user = user;
           this.fireUserChangeHandlers();
       });
-
-      // Sign in the user if they are currently signed in.
-      if (this.auth2.isSignedIn.get() == true) {
-          this.auth2.signIn();
-      }
     }
 }

@@ -1,6 +1,8 @@
-<div [ngStyle]="{'display': signInDisplay()}">
-    <div class="g-signin2"></div>
-</div>
+
+<div id="wyst-google-signin"></div>
+<br/>
+<button (click)="signOut()">[Sign Out]</button>
+</p>
 <div [ngStyle]="{'display': signOutDisplay()}">
-    <button (click)="signOut()">[Sign Out]</button>
+  User: {{auth}}
 </div>

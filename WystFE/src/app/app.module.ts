@@ -9,15 +9,18 @@ import { Authentication } from './providers/Authentication';
 
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin.component';
+import { WelcomeComponent } from './welcome.component';
 
 const appRoutes: Routes = [
-  { path: 'signin', component: SigninComponent }
+  { path: 'signin', component: SigninComponent },
+  { path: '', component: WelcomeComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent
+    SigninComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
