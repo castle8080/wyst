@@ -14,8 +14,34 @@ export class Authentication {
     }
 
     public isSignedIn(): boolean {
-      console.log("Is the user signed in: ", this.user);
-      return this.user != null;
+      return (this.user != null) && this.user.isSignedIn();
+    }
+
+    public getUserName(): string {
+      if (!this.isSignedIn()) {
+        return null;
+      }
+      else {
+        return this.user.getBasicProfile().getName();
+      }
+    }
+
+    public getEmail(): string {
+      if (!this.isSignedIn()) {
+        return null;
+      }
+      else {
+        return this.user.getBasicProfile().getEmail();
+      }
+    }
+
+    public getIdToken(): string {
+      if (!this.isSignedIn()) {
+        return null;
+      }
+      else {
+        return this.user.getAuthResponse().id_token;
+      }
     }
 
     public onUserChange(cb: () => void) {
@@ -24,19 +50,18 @@ export class Authentication {
 
     public signOut() {
       this.auth2.signOut().then(() => {
-        console.log("Signed out!");
+        console.log("Signed out.");
         this.user = null;
         this.fireUserChangeHandlers();
       });
     }
 
     private fireUserChangeHandlers() {
+      //console.log("user changed: ", this.user);
       this.userChangeHandlers.forEach(cb => cb());
     }
 
-    private initSignin() {
-      console.log("initSignin");
-
+    private initSignin(): void {
       this.auth2 = gapi.auth2.init({
         client_id: CLIENT_ID,
         scope: 'profile'

@@ -10,17 +10,21 @@ import { Authentication } from './providers/Authentication';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin.component';
 import { WelcomeComponent } from './welcome.component';
+import { InitializingComponent } from './initializing.component';
 
 const appRoutes: Routes = [
   { path: 'signin', component: SigninComponent },
-  { path: '', component: WelcomeComponent }
+  { path: 'welcome', component: WelcomeComponent },
+  { path: 'initializing', component: InitializingComponent },
+  { path: '', redirectTo: "/initializing", pathMatch: "full" }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    InitializingComponent
   ],
   imports: [
     BrowserModule,

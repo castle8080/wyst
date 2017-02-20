@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { ApplicationRef } from '@angular/core';
+import { Component, ApplicationRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { Authentication } from './providers/Authentication';
 
 @Component({
   templateUrl: './welcome.component.html'
 })
 export class WelcomeComponent {
-  constructor() {
+  constructor(public auth: Authentication) {
   }
 }
