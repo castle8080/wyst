@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 using Autofac;
 using Autofac.Core;
@@ -16,8 +17,10 @@ namespace WystWS.Boot
         {
             logger.Info("Configuring container.");
 
+            var contentDir = Directory.GetParent(Directory.GetCurrentDirectory()) + "\\content";
+            logger.Info("Content dir: " + contentDir);
             builder
-                .RegisterType<FileSystemContentRepository>()
+                .Register<FileSystemContentRepository>(ctx => new FileSystemContentRepository(contentDir))
                 .As<IContentRepository>();
         }
     }
